@@ -70,7 +70,7 @@ public class Main {
                                 System.out.println("---------NEW ACCOUNT----------");
                                 System.out.println("Enter Customer First Name : ");
                                 String a2=sc.next();
-                                while(!Pattern.matches("^[A-za-z]*",a2))
+                                while(!Pattern.matches("^[A-za-z]{3,10}",a2))
                                 {
                                     System.out.println("Not a Valid First Name!!");
                                     System.out.println("Enter a valid First Name : ");
@@ -79,7 +79,7 @@ public class Main {
 
                                 System.out.println("Enter Customer Last Name : ");
                                 String a9=sc.next();
-                                while(!Pattern.matches("^[A-za-z]*",a9))
+                                while(!Pattern.matches("^[A-za-z]{3,10}",a9))
                                 {
                                     System.out.println("Not a Valid Last Name!!");
                                     System.out.println("Enter a valid Last Name : ");
