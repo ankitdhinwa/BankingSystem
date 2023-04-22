@@ -3,7 +3,7 @@ package com.obs.bean;
 public class CustomerBean {
     private int cACno;
     private String cname;
-    private int cbal;
+    private float cbal;
     private String cmail;
     private String cpass;
     private String cmob;
@@ -14,7 +14,7 @@ public class CustomerBean {
         super();
     }
 
-    public CustomerBean(int cACno, String cname, int cbal, String cmail, String cpass, String cmob, String cadd) {
+    public CustomerBean(int cACno, String cname, float cbal, String cmail, String cpass, String cmob, String cadd) {
         super();
         this.cACno = cACno;
         this.cname = cname;
@@ -41,11 +41,11 @@ public class CustomerBean {
         this.cname = cname;
     }
 
-    public int getCbal() {
+    public float getCbal() {
         return cbal;
     }
 
-    public void setCbal(int cbal) {
+    public void setCbal(float cbal) {
         this.cbal = cbal;
     }
 

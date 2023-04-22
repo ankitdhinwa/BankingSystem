@@ -63,6 +63,7 @@ public class AccountantDAOimpl implements AccountantDAO{
                            String cadd) throws CustomerException {
 
         int cid=-1;
+        int cACno=-1;
 
         try(Connection conn= DBUtil.provideConnection()) {
 
@@ -99,12 +100,46 @@ public class AccountantDAOimpl implements AccountantDAO{
         return cid;
     }
 
+    @Override
+    public int viewAccountNo(int cid,String cname, String cmail, String cmob) throws CustomerException {
+
+        int cACno=-1;
+
+        try(Connection conn= DBUtil.provideConnection())
+        {
+
+            PreparedStatement ps3 = conn.prepareStatement("select cACno from InfoCustomer i inner join Account a on a.cid=i.cid where cname=? and cmail=? and  cmob=?");
+            ps3.setString(1,cname);
+            ps3.setString(2,cmail);
+            ps3.setString(3,cmob);
+
+
+            ResultSet rs1 = ps3.executeQuery();
+            if(rs1.next()){
+                cACno = rs1.getInt("cACno");
+            }
+            else
+            {
+                throw new CustomerException("Invalid Input!!");
+            }
+
+
+        }catch(SQLException e) {
+
+            throw new CustomerException(e.getMessage());
+
+        }
+
+        return cACno;
+    }
+
 
 //##################################################################################
 
 
     @Override
-    public String addAccount(int cbal, int cid) throws AccountException {
+    public String addAccount(float cbal, int cid) throws AccountException
+    {
 
         String message=null;
 
@@ -112,14 +147,14 @@ public class AccountantDAOimpl implements AccountantDAO{
 
             PreparedStatement ps=conn.prepareStatement("insert into Account(cbal,cid) values(?,?)");
 
-            ps.setInt(1,cbal);
+            ps.setFloat(1,cbal);
             ps.setInt(2,cid);
 
 
             int x=ps.executeUpdate();
 
             if(x > 0) {
-                System.out.println("Account added sucessfully..!");
+                System.out.println("Account added successfully..!");
             }else
                 System.out.println("Inserted data is not correct");
 
@@ -129,30 +164,28 @@ public class AccountantDAOimpl implements AccountantDAO{
             message=e.getMessage();
         }
 
+
         return message;
     }
 
 
 //######################################################################################
 
-
     @Override
-    public String updateCustomer(int cACno,String cadd) throws CustomerException {
-        // TODO Auto-generated method stub
+    public String updateCustomerMobile(int cACno, String cmob) throws CustomerException
+    {
         String message=null;
-        try(Connection conn= DBUtil.provideConnection()) {
-
-
-
-            PreparedStatement ps=conn.prepareStatement(" update infocustomer i inner join account a on i.cid=a.cid AND a.cACno=? set i.cadd=?;");
+        try(Connection conn = DBUtil.provideConnection())
+        {
+            PreparedStatement ps=conn.prepareStatement(" update infocustomer i inner join account a on i.cid=a.cid AND a.cACno=? set i.cmob=?;");
 
             ps.setInt(1, cACno);
-            ps.setString(2,cadd);
+            ps.setString(2,cmob);
 
             int x=ps.executeUpdate();
 
             if(x > 0) {
-                System.out.println("Address updated sucessfully..!");
+                System.out.println("Mobile Number updated successfully..!");
                 System.out.println("-------------------------------");
             }else {
                 System.out.println("Updation failed....Account Not Found");
@@ -163,11 +196,68 @@ public class AccountantDAOimpl implements AccountantDAO{
             e.printStackTrace();
             message=e.getMessage();
         }
+        return message;
+    }
+
+    @Override
+    public String updateCustomerAddress(int cACno,String cadd) throws CustomerException
+    {
+        // TODO Auto-generated method stub
+        String message=null;
+        try(Connection conn= DBUtil.provideConnection()) {
+
+
+
+                PreparedStatement ps=conn.prepareStatement(" update infocustomer i inner join account a on i.cid=a.cid AND a.cACno=? set i.cadd=?;");
+
+                ps.setInt(1, cACno);
+                ps.setString(2,cadd);
+
+                int x=ps.executeUpdate();
+
+                if(x > 0) {
+                    System.out.println("Address updated successfully..!");
+                    System.out.println("-------------------------------");
+                }else {
+                    System.out.println("Updation failed....Account Not Found");
+                    System.out.println("--------------------------------------");
+                }
+
+        }catch(SQLException e) {
+
+            e.printStackTrace();
+            message=e.getMessage();
+        }
 
         return message;
     }
 
+    public String updateCustomerEmail(int cACno, String cmail) throws CustomerException
+    {
+        String message=null;
+        try(Connection conn = DBUtil.provideConnection())
+        {
+            PreparedStatement ps=conn.prepareStatement(" update infocustomer i inner join account a on i.cid=a.cid AND a.cACno=? set i.cmail=?;");
 
+            ps.setInt(1, cACno);
+            ps.setString(2,cmail);
+
+            int x=ps.executeUpdate();
+
+            if(x > 0) {
+                System.out.println("Email updated successfully..!");
+                System.out.println("-------------------------------");
+            }else {
+                System.out.println("Updation failed....Account Not Found");
+                System.out.println("--------------------------------------");
+            }
+        }catch(SQLException e) {
+
+            e.printStackTrace();
+            message=e.getMessage();
+        }
+        return message;
+    }
 
 //	##################################################################################
 
@@ -189,7 +279,7 @@ public class AccountantDAOimpl implements AccountantDAO{
             int x=ps.executeUpdate();
 
             if(x > 0) {
-                System.out.println("Account deleted sucessfully..!");
+                System.out.println("Account deleted successfully..!");
                 System.out.println("-------------------------------");
             }else {
                 System.out.println("Deletion failed...Account Not Found");
@@ -211,7 +301,7 @@ public class AccountantDAOimpl implements AccountantDAO{
 
 
     @Override
-    public 	CustomerBean viewCustomer(String cACno) throws CustomerException {
+    public CustomerBean viewCustomer(String cACno) throws CustomerException {
         // TODO Auto-generated method stub
         CustomerBean cb = null;
 
@@ -256,6 +346,7 @@ public class AccountantDAOimpl implements AccountantDAO{
 
 
 
+
         return cb;
     }
 
@@ -287,7 +378,7 @@ public class AccountantDAOimpl implements AccountantDAO{
 
                 String n=rs.getString("cname");
 
-                int b=rs.getInt("cbal");
+                float b=rs.getFloat("cbal");
 
                 String e= rs.getString("cmail");
 

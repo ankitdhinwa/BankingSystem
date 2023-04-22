@@ -8,13 +8,13 @@ import java.util.Date;
 public class TransactionBean {
 
     private int accountNo;
-    private int deposit;
-    private int withdraw;
+    private float deposit;
+    private float withdraw;
     private Timestamp transaction_time;
 
 
 
-    public TransactionBean(int accountNo, int deposit, int withdraw, Timestamp transaction_time) {
+    public TransactionBean(int accountNo, float deposit, float withdraw, Timestamp transaction_time) {
         super();
         this.accountNo = accountNo;
         this.deposit = deposit;
@@ -35,7 +35,7 @@ public class TransactionBean {
         this.accountNo = accountNo;
     }
 
-    public int getDeposit() {
+    public float getDeposit() {
         return deposit;
     }
 
@@ -43,7 +43,7 @@ public class TransactionBean {
         this.deposit = deposit;
     }
 
-    public int getWithdraw() {
+    public float getWithdraw() {
         return withdraw;
     }
 

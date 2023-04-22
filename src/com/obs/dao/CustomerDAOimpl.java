@@ -60,8 +60,8 @@ public class CustomerDAOimpl implements CustomerDAO {
 
 
     @Override
-    public int viewBalance(int cACno) throws CustomerException {
-        int b=-1;
+    public float viewBalance(int cACno) throws CustomerException {
+        float b=-1;
 
         try(Connection conn = DBUtil.provideConnection()) {
 
@@ -72,7 +72,7 @@ public class CustomerDAOimpl implements CustomerDAO {
             ResultSet rs= ps.executeQuery();
 
             if(rs.next()) {
-                b=rs.getInt("cbal");
+                b=rs.getFloat("cbal");
             }
 
 
@@ -86,7 +86,7 @@ public class CustomerDAOimpl implements CustomerDAO {
 
 
     @Override
-    public int Deposit(int cACno, int amount) throws CustomerException {
+    public int Deposit(int cACno, float amount) throws CustomerException {
 
         int b=-1;
 
@@ -94,7 +94,7 @@ public class CustomerDAOimpl implements CustomerDAO {
 
             PreparedStatement ps= conn.prepareStatement("update Account set Account.cbal=Account.cbal+? where Account.cACno = ?;" );
 
-            ps.setInt(1, amount);
+            ps.setFloat(1, amount);
             ps.setInt(2, cACno);
 
             int rs = ps.executeUpdate();
@@ -103,7 +103,7 @@ public class CustomerDAOimpl implements CustomerDAO {
                 PreparedStatement ps2=conn.prepareStatement("insert into Transaction values(?,?,0,NOW());");
 
                 ps2.setInt(1, cACno);
-                ps2.setInt(2, amount);
+                ps2.setFloat(2, amount);
 
                 int rs2=ps2.executeUpdate();
             }else {
@@ -120,15 +120,15 @@ public class CustomerDAOimpl implements CustomerDAO {
 
 
     @Override
-    public int Withdraw(int cACno, int amount) throws CustomerException {
+    public float Withdraw(int cACno, float amount) throws CustomerException {
 
-        int vb=viewBalance(cACno);
+        float vb=viewBalance(cACno);
         if(vb>amount) {
             try(Connection conn = DBUtil.provideConnection()) {
 
                 PreparedStatement ps= conn.prepareStatement("update Account set cbal=cbal-? where cACno = ?;" );
 
-                ps.setInt(1, amount);
+                ps.setFloat(1, amount);
                 ps.setInt(2, cACno);
 
                 int rs= ps.executeUpdate();
@@ -137,7 +137,7 @@ public class CustomerDAOimpl implements CustomerDAO {
                     PreparedStatement ps2=conn.prepareStatement("insert into Transaction values(?,0,?,NOW());");
 
                     ps2.setInt(1, cACno);
-                    ps2.setInt(2, amount);
+                    ps2.setFloat(2, amount);
 
                     int rs2=ps2.executeUpdate();
                 }else {
@@ -160,13 +160,13 @@ public class CustomerDAOimpl implements CustomerDAO {
 
 
     @Override
-    public int Transfer(int cACno, int amount, int cACno2) throws CustomerException {
+    public int Transfer(int cACno, float amount, int cACno2) throws CustomerException {
 
-        int vb=viewBalance(cACno);
+        float vb=viewBalance(cACno);
 
         if(vb>amount && checkAccount(cACno2)) {
 
-            int wid=Withdraw(cACno, amount);
+            float wid=Withdraw(cACno, amount);
             int dep=Deposit(cACno2, amount);
 
 
@@ -213,8 +213,8 @@ public class CustomerDAOimpl implements CustomerDAO {
 
             while(rs.next()) {
                 int ac=rs.getInt("cACno");
-                int dep=rs.getInt("deposit");
-                int wid=rs.getInt("withdraw");
+                float dep=rs.getFloat("deposit");
+                float wid=rs.getFloat("withdraw");
                 Timestamp tt=rs.getTimestamp("Transaction_time");
 
                 li.add(new TransactionBean(ac,dep,wid,tt));

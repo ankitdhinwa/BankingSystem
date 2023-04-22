@@ -1,7 +1,9 @@
 package com.obs.mainwork;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import com.obs.bean.AccountantBean;
 import com.obs.bean.CustomerBean;
@@ -66,19 +68,46 @@ public class Main {
                             sc.nextLine();
                             if(x==1) {
                                 System.out.println("---------NEW ACCOUNT----------");
-                                System.out.println("Enter Customer Name");
-                                String a2=sc.nextLine();
-                                sc.nextLine();
+                                System.out.println("Enter Customer First Name : ");
+                                String a2=sc.next();
+                                while(!Pattern.matches("^[A-za-z]*",a2))
+                                {
+                                    System.out.println("Not a Valid First Name!!");
+                                    System.out.println("Enter a valid First Name : ");
+                                    a2=sc.nextLine();
+                                }
+
+                                System.out.println("Enter Customer Last Name : ");
+                                String a9=sc.next();
+                                while(!Pattern.matches("^[A-za-z]*",a9))
+                                {
+                                    System.out.println("Not a Valid Last Name!!");
+                                    System.out.println("Enter a valid Last Name : ");
+                                    a9=sc.nextLine();
+                                }
+
+                                String a10 = a2 +" "+a9;
                                 System.out.println("Enter Account Opening Balance");
-                                int a3=sc.nextInt();
+                                float a3=sc.nextFloat();
                                 System.out.println("Enter Email");
                                 String a4=sc.next();
+                                while(!Pattern.matches("^[A-za-z0-9]*@(gmail|yahoo|hotmail|outlook)\\.[a-z]*", a4))
+                                {
+                                    System.out.println("Not a valid Email Address!!");
+                                    System.out.println("Enter valid Email Address : ");
+                                    a4=sc.next();
+                                }
                                 sc.nextLine();
                                 System.out.println("Enter Password");
                                 String a5=sc.next();
                                 sc.nextLine();
                                 System.out.println("Enter Mobile number");
                                 String a6=sc.next();
+                                while(!Pattern.matches("^\\d{10}$",a6)){
+                                    System.out.println("\nNot a valid phone number\n");
+                                    System.out.println("Enter Correct Mobile Number : ");
+                                    a6 = sc.next();
+                                }
                                 sc.nextLine();
                                 System.out.println("Enter Address");
                                 String a7=sc.nextLine();
@@ -86,12 +115,21 @@ public class Main {
 
 
                                 int s1=-1;
+                                int s2=-1;
                                 try {
-                                    s1 = a.addCustomer(a2,a4,a5,a6,a7);
+                                    s1 = a.addCustomer(a10,a4,a5,a6,a7);
                                     try {
                                         a.addAccount(a3, s1);
                                     } catch (AccountException e) {
                                         // TODO Auto-generated catch block
+                                        e.printStackTrace();
+                                    }
+                                    try{
+                                        s2=a.viewAccountNo(s1,a10,a4,a6);
+                                        System.out.println("Account No : "+s2);
+                                    }
+                                    catch(Exception e)
+                                    {
                                         e.printStackTrace();
                                     }
                                 } catch (CustomerException e) {
@@ -106,17 +144,75 @@ public class Main {
 
 
                             if(x==2) {
-                                System.out.println("-------UPDATE ADDRESS-------");
+                                System.out.println("-------UPDATE CUSTOMER DETAILS-------");
                                 System.out.println("Enter Customer Account No. ");
                                 int u=sc.nextInt();
-                                System.out.println("Enter new Address");
-                                String u2=sc.next();
-                                try {
-                                    String mes=a.updateCustomer(u,u2);
-                                } catch (CustomerException e) {
-                                    // TODO Auto-generated catch block
-                                    e.printStackTrace();
+                                System.out.println("Enter field which customer want to update : ");
+                                boolean k=true;
+                                while(k)
+                                {
+                                    System.out.println("-----------------------------------------------------------------\r\n"
+                                            + "1. Update Mobile Number\r\n"
+                                            + "2. Update Address\r\n"
+                                            + "3. Update Email Address\r\n"
+                                            + "4. Updation Complete\r\n"
+                                            +"-----------------------------------------------------------------\r\n");
+                                    int z = sc.nextInt();
+                                    if(z==1)
+                                    {
+                                        System.out.println("Enter new Mobile Number : ");
+                                        String u3 = sc.next();
+                                        while(!Pattern.matches("^\\d{10}$",u3)){
+                                            System.out.println("\nNot a valid phone number\n");
+                                            System.out.println("Enter Correct Mobile Number : ");
+                                            u3 = sc.next();
+                                        }
+                                        try{
+                                            String mes1 = a.updateCustomerMobile(u,u3);
+                                        }catch (CustomerException e) {
+                                            // TODO Auto-generated catch block
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    if(z==2)
+                                    {
+                                        System.out.println("Enter new Address : ");
+                                        String u2=sc.nextLine();
+                                        sc.nextLine();
+                                        try {
+                                            String mes=a.updateCustomerAddress(u,u2);
+                                        } catch (CustomerException e) {
+                                            // TODO Auto-generated catch block
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    if(z==3)
+                                    {
+                                        System.out.println("Enter new Email Address : ");
+                                        String u4 = sc.next();
+                                        while(!Pattern.matches("^[A-za-z0-9]*@(gmail|yahoo|hotmail|outlook)\\.[a-z]*", u4))
+                                        {
+                                            System.out.println("Not a valid Email Address!!");
+                                            System.out.println("Enter valid Email Address : ");
+                                            u4=sc.next();
+                                        }
+                                        try
+                                        {
+                                            String mes2 = a.updateCustomerEmail(u,u4);
+                                        }catch (CustomerException e) {
+                                            // TODO Auto-generated catch block
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    if(z==4)
+                                    {
+                                        System.out.println("Updation Complete");
+                                        k=false;
+                                    }
+
                                 }
+                                break;
+
                             }
 
                             if(x==3) {
@@ -210,6 +306,7 @@ public class Main {
                                 try {
                                     li=cd.viewTransaction(ac);
                                     System.out.println("Account No.: "+li.get(0).getAccountNo());
+                                    //System.out.println("Opening Balance : "+a3);
                                     li.forEach(v->{
                                         System.out.println("---------------------------------------------");
                                         if(v.getDeposit()!=0)
@@ -244,12 +341,13 @@ public class Main {
                 case 2:
                     System.out.println("LOGIN <<---->> CUSTOMER");
                     System.out.println("--------------------------");
+                    System.out.println("Enter Account No");
+                    int acno=sc.nextInt();
                     System.out.println("Enter username");
                     String username=sc.next();
                     System.out.println("Enter Password");
                     String password=sc.next();
-                    System.out.println("Enter Account No");
-                    int acno=sc.nextInt();
+
 
                     CustomerDAO cd=new CustomerDAOimpl();
 
@@ -282,7 +380,7 @@ public class Main {
                             if(x==2) {
                                 System.out.println("----------DEPOSIT-----------");
                                 System.out.println("Enter Amount to Deposit");
-                                int am=sc.nextInt();
+                                float am=sc.nextFloat();
                                 cd.Deposit(acno, am);
                                 System.out.println("Your Balance after Deposit");
                                 System.out.println(cd.viewBalance(acno));
@@ -290,12 +388,12 @@ public class Main {
                             }
 
                             if(x==3) {
-                                System.out.println("----------WITHDRAWL------------");
-                                System.out.println("Enter Withdrawl amount");
-                                int wa=sc.nextInt();
+                                System.out.println("----------WITHDRAWAL------------");
+                                System.out.println("Enter Withdrawal amount");
+                                float wa=sc.nextFloat();
                                 try {
                                     cd.Withdraw(acno, wa);
-                                    System.out.println("Your Balance after Withdrawl");
+                                    System.out.println("Your Balance after Withdrawal");
                                     System.out.println(cd.viewBalance(acno));
                                     System.out.println("-----------------------------");
                                 }catch(CustomerException e) {
@@ -306,13 +404,13 @@ public class Main {
                             if(x==4) {
                                 System.out.println("----------AMOUNT TRANSFER-----------");
                                 System.out.println("Enter Amount to Transfer");
-                                int t=sc.nextInt();
+                                float t=sc.nextFloat();
                                 System.out.println("Enter Account No. to transfer amount");
                                 int ac=sc.nextInt();
 
                                 try {
                                     cd.Transfer(acno, t, ac);
-                                    System.out.println("Amount transferred Succesfully...");
+                                    System.out.println("Amount transferred Successfully...");
                                     System.out.println("-------------------------------");
                                 }catch(CustomerException e) {
                                     System.out.println(e.getMessage());

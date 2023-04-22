@@ -6,15 +6,23 @@ import com.obs.exception.AccountException;
 import com.obs.exception.AccountantException;
 import com.obs.exception.CustomerException;
 
+import java.sql.SQLException;
+
 public interface AccountantDAO {
 
     public AccountantBean LoginAccountant(String username, String password)throws AccountantException;
 
     public int addCustomer(String cname,String cmail, String cpass, String cmob, String cadd) throws CustomerException;
 
-    public String addAccount(int cbal,int cid) throws AccountException;
+    public int viewAccountNo(int cid,String name,String cmail,String cmob) throws CustomerException, SQLException;
 
-    public String updateCustomer(int cACno,String cadd) throws CustomerException;
+    public String addAccount(float cbal,int cid) throws AccountException;
+
+    public String updateCustomerAddress(int cACno,String cadd) throws CustomerException;
+
+    public String updateCustomerMobile(int cACno,String cmob) throws CustomerException;
+
+    public String updateCustomerEmail(int cACno,String cmail) throws CustomerException;
 
     public  CustomerBean viewCustomer(String cACno) throws CustomerException;
 

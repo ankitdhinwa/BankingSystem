@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="758cc7c4-abe0-4cd5-be3f-f3e4f357a7e0" name="Changes" comment="init" />
+    <list default="true" id="758cc7c4-abe0-4cd5-be3f-f3e4f357a7e0" name="Changes" comment="init">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obs/bean/CustomerBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obs/bean/CustomerBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obs/bean/TransactionBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obs/bean/TransactionBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obs/dao/AccountantDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obs/dao/AccountantDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obs/dao/AccountantDAOimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obs/dao/AccountantDAOimpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obs/dao/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obs/dao/CustomerDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obs/dao/CustomerDAOimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obs/dao/CustomerDAOimpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/obs/mainwork/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/obs/mainwork/Main.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,7 +43,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/Thoughtpearls/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar",
+    "last_opened_file_path": "D:/Thoughtpearls/BankingSystem",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
