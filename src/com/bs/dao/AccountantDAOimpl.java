@@ -1,16 +1,16 @@
-package com.obs.dao;
+package com.bs.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.obs.bean.AccountantBean;
-import com.obs.bean.CustomerBean;
-import com.obs.exception.AccountException;
-import com.obs.exception.AccountantException;
-import com.obs.exception.CustomerException;
-import com.obs.utility.DBUtil;
+import com.bs.bean.AccountantBean;
+import com.bs.bean.CustomerBean;
+import com.bs.exception.AccountException;
+import com.bs.exception.AccountantException;
+import com.bs.exception.CustomerException;
+import com.bs.utility.DBUtil;
 
 public class AccountantDAOimpl implements AccountantDAO{
 

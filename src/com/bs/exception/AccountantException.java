@@ -1,4 +1,4 @@
-package com.obs.exception;
+package com.bs.exception;
 
 public class AccountantException extends Exception{
 

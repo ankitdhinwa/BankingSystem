@@ -1,4 +1,4 @@
-package com.obs.bean;
+package com.bs.bean;
 
 public class CustomerBean {
     private int cACno;

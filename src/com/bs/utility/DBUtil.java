@@ -1,4 +1,4 @@
-package com.obs.utility;
+package com.bs.utility;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

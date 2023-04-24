@@ -1,14 +1,14 @@
 
 
-package com.obs.dao;
+package com.bs.dao;
 
 import java.util.List;
 
 //import java.util.List;
 
-import com.obs.bean.CustomerBean;
-import com.obs.bean.TransactionBean;
-import com.obs.exception.CustomerException;
+import com.bs.bean.CustomerBean;
+import com.bs.bean.TransactionBean;
+import com.bs.exception.CustomerException;
 
 public interface CustomerDAO {
 

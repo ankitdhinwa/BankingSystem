@@ -1,15 +1,15 @@
-package com.obs.mainwork;
+package com.bs.mainwork;
 
-import com.obs.bean.AccountantBean;
-import com.obs.bean.CustomerBean;
-import com.obs.bean.TransactionBean;
-import com.obs.dao.AccountantDAO;
-import com.obs.dao.AccountantDAOimpl;
-import com.obs.dao.CustomerDAO;
-import com.obs.dao.CustomerDAOimpl;
-import com.obs.exception.AccountException;
-import com.obs.exception.AccountantException;
-import com.obs.exception.CustomerException;
+import com.bs.bean.AccountantBean;
+import com.bs.bean.CustomerBean;
+import com.bs.bean.TransactionBean;
+import com.bs.dao.AccountantDAO;
+import com.bs.dao.AccountantDAOimpl;
+import com.bs.dao.CustomerDAO;
+import com.bs.dao.CustomerDAOimpl;
+import com.bs.exception.AccountException;
+import com.bs.exception.AccountantException;
+import com.bs.exception.CustomerException;
 
 import java.util.List;
 import java.util.Scanner;
