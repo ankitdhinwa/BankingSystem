@@ -29,7 +29,8 @@ public class BankingSystem
             System.out.println("Welcome To Online Banking System");
             System.out.println("**********************************");
             System.out.println("1. Accountant Portal \r\n"
-                    + "2. Customer Portal \r\n");
+                    + "2. Customer Portal \r\n" +
+                    "3. Log Out \r\n");
             System.out.println("Choose your option");
             int choice=sc.nextInt();
 
@@ -455,7 +456,10 @@ public class BankingSystem
                     break;
 
 
-
+                case 3:
+                    System.out.println("Logged Out!!");
+                    f=false;
+                    break;
             }
 
         }
