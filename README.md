@@ -1,4 +1,4 @@
-# Bankingsystem
+# Banking System
 
 This is a  jdbc project of banking system 
 which consists MySQL along with JDBC driver.
